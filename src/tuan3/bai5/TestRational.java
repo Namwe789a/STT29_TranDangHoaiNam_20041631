@@ -1,4 +1,4 @@
-package tuan3_bai5_bai6_bai7;
+package tuan3.bai5;
 
 public class TestRational {
 

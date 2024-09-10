@@ -1,4 +1,4 @@
-package tuan3_bai5_bai6_bai7;
+package tuan3.bai6;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -98,12 +98,14 @@ public class HangThucPham {
 
     // Phương thức toString trả về chuỗi chứa thông tin hàng thực phẩm
     @Override
-    public String toString() { 
-        return "Mã hàng: " + maHang +
-                "\nTên hàng: " + tenHang +
-                "\nĐơn giá: " + numberFormat.format(donGia) +
-                "\nNgày sản xuất: " + dateFormat.format(ngaySanXuat) +
-                "\nNgày hết hạn: " + dateFormat.format(ngayHetHan) +
-                "\nHàng hết hạn: " + (kiemTraHetHan() ? "Có" : "Không");
+    public String toString() {
+        return String.format("%-20s: %s\n%-20s: %s\n%-20s: %s\n%-20s: %s\n%-20s: %s\n%-20s: %s",
+                "Mã hàng", maHang,
+                "Tên hàng", tenHang,
+                "Đơn giá", numberFormat.format(donGia),
+                "Ngày sản xuất", dateFormat.format(ngaySanXuat),
+                "Ngày hết hạn", dateFormat.format(ngayHetHan),
+                "Hàng hết hạn", kiemTraHetHan() ? "Có" : "Không");
     }
+
 }
