@@ -1,4 +1,4 @@
-package tuan1_Bai1_Bai2;
+package tuan1.bai1;
 
 public class Rectangle {
 	private double chieuRong;

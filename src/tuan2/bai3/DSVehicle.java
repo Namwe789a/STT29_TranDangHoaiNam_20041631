@@ -1,4 +1,4 @@
-package tuan2_Bai3_Bai4;
+package tuan2.bai3;
 
 public class DSVehicle {
 	private Vehicle[] vehicles;

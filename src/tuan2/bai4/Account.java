@@ -1,4 +1,4 @@
-package tuan2_Bai3_Bai4;
+package tuan2.bai4;
 
 public class Account {
 	private long numOfAcc;

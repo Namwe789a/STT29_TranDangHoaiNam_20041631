@@ -1,4 +1,4 @@
-package Module3_Bai1;
+package module3_Bai1;
 
 import java.util.Scanner;
 

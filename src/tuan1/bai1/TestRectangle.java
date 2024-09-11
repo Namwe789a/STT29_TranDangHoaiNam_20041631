@@ -1,4 +1,4 @@
-package tuan1_Bai1_Bai2;
+package tuan1.bai1;
 
 import java.util.Scanner;
 

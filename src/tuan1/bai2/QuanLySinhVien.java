@@ -1,4 +1,4 @@
-package tuan1_Bai1_Bai2;
+package tuan1.bai2;
 
 public class QuanLySinhVien {
 	private int mssv;
