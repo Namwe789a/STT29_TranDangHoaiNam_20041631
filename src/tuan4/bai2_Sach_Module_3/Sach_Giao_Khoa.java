@@ -5,35 +5,65 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class Sach_Giao_Khoa extends Sach {
-	private double tinhTrang;
+	private String tinhTrang;
 
 	
 
-	public double getTinhTrang() {
+
+	
+	
+	public String getTinhTrang() {
 		return tinhTrang;
 	}
 
-	public void setTinhTrang(double tinhTrang) {
+	public void setTinhTrang(String tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
 
 	
+
 	
+	
+
+	
+
 	public Sach_Giao_Khoa(String maSach, LocalDate ngaNhap, double donGia, int soLuong, String nhaXuatBan,
-			double tinhTrang) {
-		super(maSach, ngaNhap, donGia, soLuong, nhaXuatBan);
+			 String tinhTrang) {
+		super(maSach, ngaNhap, donGia, soLuong, nhaXuatBan, "Sách Giáo Khoa");
 		this.tinhTrang = tinhTrang;
 	}
+	
+	
 
-	public Sach_Giao_Khoa() {
-		super();
-	}
+	
+
+	
 
 	@Override
-	public String toString() {
-		return super.toString() + "/n Tình Trạng"+getTinhTrang();
+	public double thanhTien() {
+		 try {
+		        if ("Mới".equalsIgnoreCase(tinhTrang)) { // Nếu tình trạng là "Mới"
+		            return soLuong * donGia;             // Tính giá sách mới
+		        } else if ("Cũ".equalsIgnoreCase(tinhTrang)) { // Nếu tình trạng là "Cũ"
+		            return soLuong * donGia * 0.5;       // Tính giá sách cũ với 50% giá
+		        } else {
+		            throw new IllegalArgumentException("Tình trạng sách không hợp lệ");
+		        }
+		    } catch (Exception e) {
+		        System.out.println("Lỗi khi tính thành tiền sách giáo khoa: " + e.getMessage());
+		        return 0;
+		    }
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		 return String.format(
+		            "%s|%-15s|%-20.2f", // Điều chỉnh kích thước cột nếu cần thiết
+		            super.toString(), 
+		            
+		           getTinhTrang(),
+		           thanhTien()
+		        );
+	}
 }

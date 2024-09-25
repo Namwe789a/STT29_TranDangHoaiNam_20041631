@@ -5,14 +5,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Objects;
 
-public class Sach {
+public abstract class Sach {
 	protected String maSach;
 	protected LocalDate ngaNhap;
 	protected double donGia;
 	protected int soLuong;
 	protected String nhaXuatBan;
-	
+	protected String loaiSach; // Thêm thuộc tính phân loại
+	abstract double thanhTien();
 	 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	  NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
@@ -47,42 +49,64 @@ public class Sach {
 		this.nhaXuatBan = nhaXuatBan;
 	}
 	
+
+	
+	
+	
 	public String getLoaiSach() {
-	    return "Sách";
+		return loaiSach;
+	}
+	public void setLoaiSach(String loaiSach) {
+		this.loaiSach = loaiSach;
 	}
 	
 	
-	
-	
-	public Sach(String maSach, LocalDate ngaNhap, double donGia, int soLuong, String nhaXuatBan) {
+	public Sach(String maSach, LocalDate ngaNhap, double donGia, int soLuong, String nhaXuatBan, String loaiSach) {
 		super();
 		this.maSach = maSach;
 		this.ngaNhap = ngaNhap;
 		this.donGia = donGia;
 		this.soLuong = soLuong;
 		this.nhaXuatBan = nhaXuatBan;
+		this.loaiSach = loaiSach;
 	}
 	public Sach() {
 		super();
 	}
-	  public double thanhTien() {
-	        return 0;
-	    }
-	    
+	 
+	  
 
-	@Override
-	public String toString() {
-	    return String.format(
-	        "%-10s %-15s %-10s %-10d %-20s %-15s", // Bao gồm loại sách
-	        maSach,                          // Mã sách
-	        ngaNhap.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), // Ngày nhập
-	        numberFormat.format(donGia),      // Đơn giá định dạng tiền tệ
-	        soLuong,                         // Số lượng
-	        nhaXuatBan,                      // Nhà xuất bản
-	        getLoaiSach() 						 /// Loại sách
-	        
-	    );
+	  @Override
+	public int hashCode() {
+		return Objects.hash(donGia, loaiSach, maSach, ngaNhap, nhaXuatBan, soLuong);
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sach other = (Sach) obj;
+		return Double.doubleToLongBits(donGia) == Double.doubleToLongBits(other.donGia)
+				&& Objects.equals(loaiSach, other.loaiSach) && Objects.equals(maSach, other.maSach)
+				&& Objects.equals(ngaNhap, other.ngaNhap) && Objects.equals(nhaXuatBan, other.nhaXuatBan)
+				&& soLuong == other.soLuong;
+	}
+	@Override
+	  public String toString() {
+	      return String.format(
+	          "%-10s|%-15s|%-10.2f|%-10d|%-20s|%-15s", // Kích thước cột cho các trường
+	          maSach,                          // Mã sách
+	          ngaNhap.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), // Ngày nhập
+	          donGia,                          // Đơn giá
+	          soLuong,                         // Số lượng
+	          nhaXuatBan,                      // Nhà xuất bản
+	          getLoaiSach()                    // Loại sách
+	      );
+	  }
+
 	
 	
 	
