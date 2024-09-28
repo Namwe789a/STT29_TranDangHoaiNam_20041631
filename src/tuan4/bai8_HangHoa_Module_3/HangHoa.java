@@ -6,10 +6,11 @@ import java.util.Locale;
 import java.util.Objects;
 
 public abstract  class HangHoa {
-	 protected final String maHang;  // Mã hàng không được sửa
-	    protected String tenHang;
-	    protected int soLuongTon;
-	    private double donGia;
+	protected final String maHang; // Mã hàng không được sửa
+    protected String tenHang;
+    protected int soLuongTon;
+    protected double donGia;
+    protected String loaiHang;
 	public abstract double tinhVAT();
     public abstract String danhGiaMucDoBanBuon();
 	
@@ -17,7 +18,7 @@ public abstract  class HangHoa {
 	NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 	
 
-	    public HangHoa(String maHang, String tenHang, int soLuongTon, double donGia) {
+	    public HangHoa(String maHang, String tenHang, int soLuongTon, double donGia, String loaiHang) {
 	        if (maHang == null || maHang.isEmpty()) {
 	            throw new IllegalArgumentException("Mã hàng không được để trống.");
 	        }
@@ -34,6 +35,7 @@ public abstract  class HangHoa {
 	        this.tenHang = tenHang;
 	        this.soLuongTon = soLuongTon;
 	        this.donGia = donGia;
+	        this.loaiHang = loaiHang; // Thêm thuộc tính phân loại
 	    }
 
 	    public String getMaHang() {
@@ -96,7 +98,7 @@ public abstract  class HangHoa {
 	}
 	@Override
 	public String toString() {
-		return String.format("%-10s|%-15s|%-10d|%-10.2f", maHang, tenHang, soLuongTon, donGia);
+		 return String.format("%-10s|%-15s|%-10d|%-10.2f|%-15s", maHang, tenHang, soLuongTon, donGia, loaiHang);
 	}
 	
 	

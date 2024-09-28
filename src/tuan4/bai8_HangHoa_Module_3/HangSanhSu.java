@@ -1,57 +1,67 @@
 package tuan4.bai8_HangHoa_Module_3;
 
+
+
+import java.time.LocalDate;
+
 public class HangSanhSu extends HangHoa {
-	 private String nhaSanXuat;
-	    private String ngayNhapKho;
-	    
-	    
-	    
+    private String nhaSanXuat; // Nhà sản xuất
+    private LocalDate ngayNhapKho; // Ngày nhập kho
 
-	    public String getNhaSanXuat() {
-			return nhaSanXuat;
-		}
+    // Constructor
+    public HangSanhSu(String maHang, String tenHang, int soLuongTon, double donGia, 
+                      String nhaSanXuat, LocalDate ngayNhapKho) {
+        super(maHang, tenHang, soLuongTon, donGia, "Sành sứ"); // Gọi constructor của lớp cha
+        this.nhaSanXuat = nhaSanXuat; // Khởi tạo nhà sản xuất
+        this.ngayNhapKho = ngayNhapKho; // Khởi tạo ngày nhập kho
+    }
 
-		public void setNhaSanXuat(String nhaSanXuat) {
-			this.nhaSanXuat = nhaSanXuat;
-		}
+   
+	public HangSanhSu(String maHang, String tenHang, int soLuongTon, double donGia, String loaiHang, String nhaSanXuat,
+			LocalDate ngayNhapKho) {
+		super(maHang, tenHang, soLuongTon, donGia, loaiHang);
+		this.nhaSanXuat = nhaSanXuat;
+		this.ngayNhapKho = ngayNhapKho;
+	}
 
-		public String getNgayNhapKho() {
-			return ngayNhapKho;
-		}
 
-		public void setNgayNhapKho(String ngayNhapKho) {
-			this.ngayNhapKho = ngayNhapKho;
-		}
+	// Getter và Setter cho nhaSanXuat
+    public String getNhaSanXuat() {
+        return nhaSanXuat;
+    }
 
-		public HangSanhSu(String maHang, String tenHang, int soLuongTon, double donGia,
-	                      String nhaSanXuat, String ngayNhapKho) {
-	        super(maHang, tenHang, soLuongTon, donGia);
-	        this.nhaSanXuat = nhaSanXuat;
-	        this.ngayNhapKho = ngayNhapKho;
-	    }
+    public void setNhaSanXuat(String nhaSanXuat) {
+        this.nhaSanXuat = nhaSanXuat;
+    }
 
-	    @Override
-	    public double tinhVAT() {
-	        return tinhGiaBan() * 0.1;
-	    }
+    // Getter và Setter cho ngayNhapKho
+    public LocalDate getNgayNhapKho() {
+        return ngayNhapKho;
+    }
 
-	  
+    public void setNgayNhapKho(LocalDate ngayNhapKho) {
+        this.ngayNhapKho = ngayNhapKho;
+    }
 
-		@Override
-		public String danhGiaMucDoBanBuon() {
-			// Nếu số lượng tồn kho > 50 và thời gian lưu kho > 10 ngày thì đánh giá là bán chậm
-	        // Tính thời gian lưu kho giả định
-	        int soNgayLuuKho = 15; // Thay thế bằng cách tính ngày thực tế
-	        if (soLuongTon > 50 && soNgayLuuKho > 10) {
-	            return "Bán chậm";
-	        }
-	        return "Không đánh giá";
-		}
+    @Override
+    public double tinhVAT() {
+        return tinhGiaBan() * 0.1; // Tính VAT cho hàng sành sứ
+    }
 
-		@Override
-		public String toString() {
-			 return super.toString() + String.format("|%-20s|%-15s", nhaSanXuat, ngayNhapKho);
-		}
-		
-		
+    @Override
+    public String danhGiaMucDoBanBuon() {
+        int soNgayLuuKho = (int) java.time.temporal.ChronoUnit.DAYS.between(ngayNhapKho, LocalDate.now());
+        if (soLuongTon > 50 && soNgayLuuKho > 10) {
+            return "Bán chậm"; // Đánh giá bán chậm nếu số lượng tồn và số ngày lưu kho thỏa mãn
+        }
+        return "Không đánh giá"; // Trả về đánh giá không có
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s|%-15s|%-10d|%-10.2f|%-20s|%-15s|%-15s",
+                maHang, tenHang, soLuongTon, donGia, nhaSanXuat, ngayNhapKho, "Sành sứ");
+    }
+
+
 }

@@ -1,6 +1,8 @@
 package tuan4.bai3_GiaoDich_Module_3;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ListGiaoDich {
 	private ArrayList<GiaoDich> listGiaoDich;
@@ -52,4 +54,18 @@ public class ListGiaoDich {
 	public ArrayList<GiaoDich> getListGiaoDich() {
 		return listGiaoDich;
 	}
+	
+	
+	public void sortTheoSoLuong() {
+	    Collections.sort(listGiaoDich, new Comparator<GiaoDich>() {
+	        @Override
+	        public int compare(GiaoDich o1, GiaoDich o2) {
+	            return Integer.compare(o1.getSoLuong(), o2.getSoLuong());
+	        }
+	    });
+	    System.out.println("Đã sắp xếp theo số lượng.");
+	}
+	
+
+
 }

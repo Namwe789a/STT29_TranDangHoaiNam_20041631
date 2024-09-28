@@ -16,19 +16,40 @@ public class TestGiaoDich {
   // Hàm hiển thị menu
   static void Menu() {
       System.out.println("\t****************************************");
-      System.out.println("\t**   Chương trình quản lí chuyến xe   **");
+      System.out.println("\t**   Chương trình quản lí    **");
       System.out.println("\t* 1. Nhập cứng                         *");
       System.out.println("\t* 2. Thêm sách từ bàn phím             *");
       System.out.println("\t* 3. Xuất                              *");
-      System.out.println("\t* 4. Thoát                             *");
+      System.out.println("\t* 4. Sắp xếp theo số lượng           *");
+      System.out.println("\t* 5. Thoát                             *");
       System.out.println("\t****************************************");
   }
 
-  // Hàm in tiêu đề bảng
-  public static void inTieuDe() {
-      System.out.printf("%-10s|%-15s|%-10s|%-10s|%-15s|%-25s|%-20s|%-20s \n", 
-                        "Mã Giao Dich", "Ngày ", "Đơn Giá", "Số Lượng", "Loại giao dịch", "Loại Vàng/Loại Tiền", "Tỉ Giá", "Thành Tiền");
-  }
+  public static void inTieuDe(String loaiGiaoDich) {
+	    if (loaiGiaoDich.equals("Vàng")) {
+	    	 System.out.println("-----------------------------------------------------------------------------------");
+	        System.out.printf("%-10s|%-15s|%-10s|%-10s|%-15s|%-20s|%-20s|%-20s\n", 
+	                          "Mã Giao Dịch", "Ngày", "Đơn Giá", "Số Lượng", 
+	                          "Loại Giao Dịch", "Loại Vàng", "Thành Tiền", "VAT");
+	    } else if (loaiGiaoDich.equals("Tiền")) {
+	    	 System.out.println("-----------------------------------------------------------------------------------");
+	        System.out.printf("%-10s|%-15s|%-10s|%-10s|%-15s|%-10s|%-10s|%-10s\n", 
+	                          "Mã Giao Dịch", "Ngày", "Đơn Giá", "Số Lượng", 
+	                          "Loại Giao Dịch", "Loại Tiền", "Tỉ Giá", "Thành Tiền");
+	    }
+	}
+  static void xuat(ListGiaoDich dsGiaoDich) {
+	    for (GiaoDich giaodich : dsGiaoDich.getListGiaoDich()) {
+	        if (giaodich instanceof GiaoDich_Vang) {
+	            inTieuDe("Vàng");
+	            System.out.println(giaodich);
+	        } else if (giaodich instanceof GiaoDich_Tien) {
+	            inTieuDe("Tiền");
+	            System.out.println(giaodich);
+	        }
+	    }
+	}
+
 
 	static void nhapCung() throws Exception {
 		try {
@@ -112,13 +133,7 @@ public class TestGiaoDich {
 
     
 	
-	// Hàm xuất danh sách sách
-    static void xuat(ListGiaoDich dsGiaoDich) {
-        inTieuDe();
-        for (GiaoDich giaodich : dsGiaoDich.getListGiaoDich()) {
-            System.out.println(giaodich);
-        }
-    }
+
     
     public static void main(String[] args) throws Exception {
         int chon = -1;
@@ -137,14 +152,16 @@ public class TestGiaoDich {
                 case 3:
                     xuat(dsGiaoDich);
                     break;
-                case 4:
-                    // Xuất danh sách sách tham khảo
-                    ArrayList<GiaoDich> thamKhaoList = dsGiaoDich.getListGiaoDich();
-                    inTieuDe();
-                    for (GiaoDich s : thamKhaoList) {
-                        System.out.println(s.toString());
-                    }
-                    break;
+               
+                case 4: 
+					dsGiaoDich.sortTheoSoLuong();
+					xuat(dsGiaoDich);
+					break;
+                case 5:
+					System.out.println("Cảm ơn bạn đã sử dụng chương trình");
+					break;
+                    
+
                 default:
                     System.out.println("Cảm ơn bạn đã sử dụng chương trình");
             }
