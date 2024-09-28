@@ -78,7 +78,7 @@ public abstract class Sach {
 
 	  @Override
 	public int hashCode() {
-		return Objects.hash(donGia, loaiSach, maSach, ngaNhap, nhaXuatBan, soLuong);
+		return Objects.hash(maSach);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -89,10 +89,7 @@ public abstract class Sach {
 		if (getClass() != obj.getClass())
 			return false;
 		Sach other = (Sach) obj;
-		return Double.doubleToLongBits(donGia) == Double.doubleToLongBits(other.donGia)
-				&& Objects.equals(loaiSach, other.loaiSach) && Objects.equals(maSach, other.maSach)
-				&& Objects.equals(ngaNhap, other.ngaNhap) && Objects.equals(nhaXuatBan, other.nhaXuatBan)
-				&& soLuong == other.soLuong;
+		return Objects.equals(maSach, other.maSach);
 	}
 	@Override
 	  public String toString() {

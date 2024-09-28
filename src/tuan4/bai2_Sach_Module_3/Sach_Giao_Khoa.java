@@ -5,64 +5,55 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class Sach_Giao_Khoa extends Sach {
-	private String tinhTrang;
+	
+	private boolean tinhTrang;
 
 	
-
-
-	
-	
-	public String getTinhTrang() {
+	public boolean isTinhTrang() {
 		return tinhTrang;
 	}
-
-	public void setTinhTrang(String tinhTrang) {
+	public void setTinhTrang(boolean tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
+	public Sach_Giao_Khoa() {
+		super();
+		this.loaiSach = "Sách Giáo Khoa";
+	}
 
-	
-
-	
-	
-
-	
-
+ 
 	public Sach_Giao_Khoa(String maSach, LocalDate ngaNhap, double donGia, int soLuong, String nhaXuatBan,
-			 String tinhTrang) {
+			 boolean tinhTrang) {
 		super(maSach, ngaNhap, donGia, soLuong, nhaXuatBan, "Sách Giáo Khoa");
 		this.tinhTrang = tinhTrang;
 	}
-	
-	
 
-	
-
-	
 
 	@Override
 	public double thanhTien() {
-		 try {
-		        if ("Mới".equalsIgnoreCase(tinhTrang)) { // Nếu tình trạng là "Mới"
-		            return soLuong * donGia;             // Tính giá sách mới
-		        } else if ("Cũ".equalsIgnoreCase(tinhTrang)) { // Nếu tình trạng là "Cũ"
-		            return soLuong * donGia * 0.5;       // Tính giá sách cũ với 50% giá
-		        } else {
-		            throw new IllegalArgumentException("Tình trạng sách không hợp lệ");
-		        }
-		    } catch (Exception e) {
-		        System.out.println("Lỗi khi tính thành tiền sách giáo khoa: " + e.getMessage());
-		        return 0;
-		    }
+	    try {
+	        if (tinhTrang) { // Nếu tinhTrang là true (tức là sách mới)
+	            return soLuong * donGia; // Tính giá sách mới
+	        } else { // Nếu tinhTrang là false (tức là sách cũ)
+	            return soLuong * donGia * 0.5; // Tính giá sách cũ với 50% giá
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Lỗi khi tính thành tiền sách giáo khoa: " + e.getMessage());
+	        return 0;
+	    }
 	}
+
 	
 	
+	// Kiểm tra tình trạng sách, nếu true thì xuất "Mới", nếu false thì xuất "Cũ"
+   
 	@Override
 	public String toString() {
+		 String trangThaiSach = tinhTrang ? "Mới" : "Cũ";
 		 return String.format(
 		            "%s|%-15s|%-20.2f", // Điều chỉnh kích thước cột nếu cần thiết
 		            super.toString(), 
 		            
-		           getTinhTrang(),
+		           trangThaiSach,
 		           thanhTien()
 		        );
 	}

@@ -12,7 +12,6 @@ import tuan4.bai1_ChuyenXe_Module3.NoiThanh;
 
 public class ListSach {
 	ArrayList<Sach> sach;
-	ArrayList k;
 	
 	public ListSach() {
 		sach = new ArrayList<Sach>();
@@ -20,10 +19,10 @@ public class ListSach {
 	
 	//-------------------------------begin method ----------------------------------
 		public void add(Sach sach1) throws Exception {
-			if (sach.contains(sach) == false)// hiểu dc nhờ hascode equa của lớp chuyến xe
+			if (!sach.contains(sach1))// hiểu dc nhờ hascode equa của lớp sach
 				sach.add(sach1);
 			else {
-				throw new Exception("Mã chuyến xe đã trùng");
+				throw new Exception("Mã Sách đã trùng");
 			}
 		}
 		public int timKiemViTri(String maSach) {
@@ -44,40 +43,33 @@ public class ListSach {
 			sach.remove(s);
 		}
 		
-		
-		public ArrayList<Sach_Giao_Khoa> getListSachGiaoKhoa() {
-			ArrayList<Sach_Giao_Khoa> DSSachGiaoKhao = new ArrayList<Sach_Giao_Khoa>();
+		//-----------------------------trả về sách Giáo Khoa -----------------
+		public ArrayList<Sach> getListSachGiaoKhoa() {
+			ArrayList<Sach> DSSachGiaoKhao = new ArrayList<Sach>();
 			for (Sach s : sach)
 				if (s instanceof Sach_Giao_Khoa)
 					DSSachGiaoKhao.add((Sach_Giao_Khoa) s);
 
 			return DSSachGiaoKhao;
 		}
-		//-----------------------------trả về danh sách xe ngoại thành -----------------
-		public ArrayList<Sach_Kham_Khao> getListSachKhamKhao() {
-			ArrayList<Sach_Kham_Khao> DSSachKhamKhao = new ArrayList<Sach_Kham_Khao>();
-			for (Sach s : sach)
-				if (s instanceof Sach_Kham_Khao)
-					DSSachKhamKhao.add((Sach_Kham_Khao) s);
+		//-----------------------------trả về sách kham khảo -----------------
+		 public ArrayList<Sach> getListThamKhao() {
+		        ArrayList<Sach> DSSachKhamKhao = new ArrayList<Sach>();
+		        for (Sach s : sach) {
+		            if (s instanceof Sach_Kham_Khao) {
+		            	DSSachKhamKhao.add(s);
+		            }
+		        }
+		        return DSSachKhamKhao;
+		    }
 
-			return DSSachKhamKhao;
-		}
-
-	//-------------------------------trả về danh sách chuyến xe --------------------
+	//-------------------------------trả về danh sách sach--------------------
 		public ArrayList<Sach> getDS() {
 			return sach;
 		}
 		
-		 public ArrayList<Sach> getListThamKhao() {
-		        ArrayList<Sach> temporaryLs = new ArrayList<Sach>();
-		        for (Sach s : sach) {
-		            if (s instanceof Sach_Kham_Khao) {
-		                temporaryLs.add(s);
-		            }
-		        }
-		        return temporaryLs;
-		    }
-		 
+
+	
 	// sắp xếp theo số lượng
 		   public void sortTheoSoLuong() {
 		        Collections.sort(sach, new Comparator<Sach>() {

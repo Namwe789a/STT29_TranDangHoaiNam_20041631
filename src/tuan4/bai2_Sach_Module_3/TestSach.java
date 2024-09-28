@@ -1,5 +1,6 @@
 package tuan4.bai2_Sach_Module_3;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +45,7 @@ public class TestSach {
                 50000.0,                          // donGia
                 20,                               // soLuong
                 "NXB Giáo Dục",                   // nhaXuatBan
-                "Mới"                             // tinhTrang
+                true                            // tinhTrang
             );
             Sach sachgiaokhoa2 = new Sach_Giao_Khoa(
                 "SGK002",                         // maSach
@@ -52,7 +53,7 @@ public class TestSach {
                 50000.0,                          // donGia
                 15,                               // soLuong
                 "NXB Giáo Dục",                   // nhaXuatBan
-                "Cũ"                              // tinhTrang
+                false                           // tinhTrang
             );
 
             // Thêm cả hai sách vào danh sách 'sach'
@@ -74,8 +75,11 @@ public class TestSach {
         System.out.print("Nhập mã sách: ");
         String maSach = scanner.nextLine();
 
-        System.out.print("Nhập ngày nhập (yyyy-mm-dd): ");
-        LocalDate ngayNhap = LocalDate.parse(scanner.nextLine());
+       
+      
+        System.out.print("Nhập ngày nhập (dd/MM/yyyy): ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate ngayNhap = LocalDate.parse(scanner.nextLine(), formatter);
 
         System.out.print("Nhập đơn giá: ");
         double donGia = scanner.nextDouble();
@@ -88,8 +92,11 @@ public class TestSach {
         String nhaXuatBan = scanner.nextLine();
 
         if (loaiSach == 1) { // Sách giáo khoa
-            System.out.print("Nhập tình trạng sách (Mới/Cũ): ");
-            String tinhTrang = scanner.nextLine();
+            System.out.print("Nhập tình trạng sách (1. Mới, 2. Cũ): ");
+            int tinhTrangInput = scanner.nextInt();
+            scanner.nextLine(); // Xử lý dòng mới
+
+            boolean tinhTrang = tinhTrangInput == 1; // Nếu người dùng nhập 1 thì là "Mới" (true), nếu nhập 2 thì là "Cũ" (false)
 
             Sach sachGiaoKhoa = new Sach_Giao_Khoa(maSach, ngayNhap, donGia, soLuong, nhaXuatBan, tinhTrang);
             sach.add(sachGiaoKhoa);
@@ -104,6 +111,7 @@ public class TestSach {
             System.out.println("Lựa chọn không hợp lệ!");
         }
     }
+
 
     // Hàm xuất danh sách sách
     static void xuat(ListSach sach) {
