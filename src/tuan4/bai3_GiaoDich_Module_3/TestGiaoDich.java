@@ -71,11 +71,16 @@ public class TestGiaoDich {
 					50000.0, // donGia
 					15, // soLuong
 					"Giao Dịch Vàng", "Loai 3");
-			GiaoDich gd4 = new GiaoDich_Tien("GD004", // maSach
-					LocalDate.of(2023, 9, 13), // ngaNhap
-					50000.0, // donGia
-					15, // soLuong
-					"Giao Dịch Tiền Tệ", "USD");
+			GiaoDich gd4 = new GiaoDich_Tien(
+				    "GD004", // maGiaoDich
+				    LocalDate.of(2023, 9, 13), // ngayGiaoDich
+				    50000.0, // donGia
+				    15, // soLuong
+				    "Giao Dịch Tiền" ,
+				    "USD", 23.000// loaiTien
+				    // tiGia, giả sử tỷ giá USD/VND là 23000
+				);
+
 			// Thêm cả hai sách vào danh sách 'sach'
 			dsGiaoDich.addGiaoDich(gd1);
 			dsGiaoDich.addGiaoDich(gd2);
@@ -94,13 +99,13 @@ public class TestGiaoDich {
         scanner.nextLine(); // Xử lý dòng mới sau khi nhập số
 
         System.out.print("Nhập mã giao dich: ");
-        String maSach = scanner.nextLine();
+        String maGiaoDich = scanner.nextLine();
 
        
       
         System.out.print("Nhập ngày giao dịch (dd/MM/yyyy): ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate ngayNhap = LocalDate.parse(scanner.nextLine(), formatter);
+        LocalDate ngayGiaoDich = LocalDate.parse(scanner.nextLine(), formatter);
 
         System.out.print("Nhập đơn giá: ");
         double donGia = scanner.nextDouble();
@@ -114,7 +119,7 @@ public class TestGiaoDich {
             System.out.print("Nhập Loại Vàng (VD: Vàng 24K, Vàng 18K, ...): ");
             String loaiVang = scanner.nextLine(); // Người dùng nhập loại vàng
 
-            GiaoDich giaoDich_Vang = new GiaoDich_Vang(maSach, ngayNhap, donGia, soLuong, "Giao Dịch Vàng", loaiVang);
+            GiaoDich giaoDich_Vang = new GiaoDich_Vang(maGiaoDich, ngayGiaoDich, donGia, soLuong, "Giao Dịch Vàng", loaiVang);
             dsGiaoDich.addGiaoDich(giaoDich_Vang);
 
         } else if (loaiGiaoDich == 2) { // Giao dịch tiền
@@ -124,7 +129,8 @@ public class TestGiaoDich {
             System.out.print("Nhập tỉ giá: ");
             double tiGia = scanner.nextDouble(); // Người dùng nhập tỉ giá
 
-            GiaoDich giaoDich_Tien = new GiaoDich_Tien(maSach, ngayNhap, donGia, soLuong, "Giao Dịch Tiền", loaiTien, tiGia);
+            GiaoDich giaoDich_Tien = new GiaoDich_Tien(maGiaoDich, ngayGiaoDich, donGia, soLuong, "Giao Dịch Tiền", loaiTien, tiGia);
+
             dsGiaoDich.addGiaoDich(giaoDich_Tien);
         } else {
             System.out.println("Lựa chọn không hợp lệ!");

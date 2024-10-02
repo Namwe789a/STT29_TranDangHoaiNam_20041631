@@ -64,7 +64,7 @@ public class HangThucPham extends HangHoa {
 
     @Override
     public String toString() {
-        return String.format("%-10s|%-15s|%-10d|%-10.2f|%-20s|%-15s|%-15s|%-15s|%-15s",
+        return String.format("%-10s|%-15s|%-10d|%-10.2f|%-20s|%-15s|%-15s|%-15s",
                 maHang, tenHang, soLuongTon, donGia, nhaCungCap, ngaySanXuat, ngayHetHan, "Thực phẩm");
     }
 
