@@ -3,6 +3,7 @@ package tuan4.bai8_HangHoa_Module_3;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class HangSanhSu extends HangHoa {
     private String nhaSanXuat; // Nhà sản xuất
@@ -58,9 +59,12 @@ public class HangSanhSu extends HangHoa {
     }
 
     @Override
+    
     public String toString() {
-        return String.format("%-10s|%-15s|%-10d|%-10.2f|%-20s|%-15s|%-15s",
-                maHang, tenHang, soLuongTon, donGia, nhaSanXuat, ngayNhapKho, "Sành sứ");
+    	 String ngayNhapKhotFormatted = ( ngayNhapKho != null) ? 
+    			 ngayNhapKho.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "N/A";
+        return super.toString() + String.format("|%-20s|%-15s|%-10.2f",
+                 nhaSanXuat, ngayNhapKhotFormatted,tinhVAT());
     }
 
 
