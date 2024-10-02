@@ -9,6 +9,7 @@ import tuan4.bai2_Sach_Module_3.ListSach;
 import tuan4.bai2_Sach_Module_3.Sach;
 import tuan4.bai2_Sach_Module_3.Sach_Giao_Khoa;
 import tuan4.bai2_Sach_Module_3.Sach_Kham_Khao;
+import tuan4.bai8_HangHoa_Module_3.QuanLyKho;
 
 public class TestGiaoDich {
   static ListGiaoDich dsGiaoDich = new ListGiaoDich();
@@ -21,7 +22,8 @@ public class TestGiaoDich {
       System.out.println("\t* 2. Thêm sách từ bàn phím             *");
       System.out.println("\t* 3. Xuất                              *");
       System.out.println("\t* 4. Sắp xếp theo số lượng           *");
-      System.out.println("\t* 5. Thoát                             *");
+      System.out.println("\t* 4. Xóa                           *");
+      System.out.println("\t* 6. Thoát                             *");
       System.out.println("\t****************************************");
   }
 
@@ -50,7 +52,18 @@ public class TestGiaoDich {
 	    }
 	}
 
-
+  static void xoa(ListGiaoDich dsGiaoDich) {
+      Scanner scanner = new Scanner(System.in);
+      System.out.print("Nhập mã hàng cần xóa: ");
+      String ma = scanner.nextLine();
+      
+      // Sử dụng phương thức xoaHang của đối tượng ds (QuanLyKho)
+      if (dsGiaoDich.xoaHang(ma)) {
+          System.out.println("Xóa thành công hàng có mã: " + ma);
+      } else {
+          System.out.println("Xóa không thành công. Không tìm thấy hàng có mã: " + ma);
+      }
+  }
 	static void nhapCung() throws Exception {
 		try {
 			// Khởi tạo đối tượng Sach_Kham_Khao
@@ -163,7 +176,10 @@ public class TestGiaoDich {
 					dsGiaoDich.sortTheoSoLuong();
 					xuat(dsGiaoDich);
 					break;
-                case 5:
+                case 5: 
+                	xoa(dsGiaoDich);
+                	break;
+                case 6:
 					System.out.println("Cảm ơn bạn đã sử dụng chương trình");
 					break;
                     

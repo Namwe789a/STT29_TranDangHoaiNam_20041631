@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import tuan4.bai8_HangHoa_Module_3.HangHoa;
+
 public class ListGiaoDich {
 	private ArrayList<GiaoDich> listGiaoDich;
 	
@@ -28,9 +30,22 @@ public class ListGiaoDich {
 		return null;
 	}
 	
-	public void xoa(GiaoDich gd) {
-		listGiaoDich.remove(gd);
-	}
+
+    public boolean xoaHang(String maHang) {
+        GiaoDich hangToRemove = null;
+        for (GiaoDich hang : listGiaoDich) {
+            if (hang.getMaGiaoDich().equals(maHang)) {
+                hangToRemove = hang;
+                break;
+            }
+        }
+
+        if (hangToRemove != null) {
+        	listGiaoDich.remove(hangToRemove);
+            return true; // Xóa thành công
+        }
+        return false; // Không tìm thấy hàng để xóa
+    }
 	
 	public ArrayList<GiaoDich> getListGiaoDichVang() {
 		ArrayList<GiaoDich> DSGiaoDichVang = new ArrayList<GiaoDich>();

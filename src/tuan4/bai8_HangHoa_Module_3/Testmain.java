@@ -199,6 +199,7 @@ public class Testmain {
                     case 4: // Chức năng xóa hàng hóa
 					
 						xoa(dsHang);
+						xuat(dsHang);
                         break;
 					case 5: // Sắp xếp theo đơn giá
 						dsHang.sortTheoSoLuong();
