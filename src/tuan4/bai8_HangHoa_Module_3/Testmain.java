@@ -20,6 +20,9 @@ public class Testmain {
         System.out.println("\t* 4. Xóa hàng hóa theo mã              *");  // Tùy chọn mới
         System.out.println("\t* 5. Sắp xếp theo đơn giá        *");  // Tùy chọn mới
         System.out.println("\t* 6. Sắp xếp theo đơn giá ngày nhập          *");  // Tùy chọn mới
+        System.out.println("\t* 8. xuất thực phẩm     *");
+        System.out.println("\t* 9. xuất điện máy          *");
+        System.out.println("\t* 10. xuất sành sứ          *");
         System.out.println("\t* 0. Thoát                              *");
         System.out.println("\t****************************************");
     }
@@ -86,6 +89,33 @@ public class Testmain {
 
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+    static void xuatTungLoai(QuanLyKho dsHang, String loai) {
+        boolean coLoaiHang = false; // Cờ kiểm tra xem có hàng thuộc loại cần xuất hay không
+        for (HangHoa hang : dsHang.getListHang()) {
+            if (loai.equalsIgnoreCase("Thực phẩm") && hang instanceof HangThucPham) {
+                if (!coLoaiHang) {
+                    inTieuDe("Thực phẩm");
+                    coLoaiHang = true;
+                }
+                System.out.println(hang);
+            } else if (loai.equalsIgnoreCase("Điện máy") && hang instanceof HangDienMay) {
+                if (!coLoaiHang) {
+                    inTieuDe("Điện máy");
+                    coLoaiHang = true;
+                }
+                System.out.println(hang);
+            } else if (loai.equalsIgnoreCase("Sành sứ") && hang instanceof HangSanhSu) {
+                if (!coLoaiHang) {
+                    inTieuDe("Sành sứ");
+                    coLoaiHang = true;
+                }
+                System.out.println(hang);
+            }
+        }
+        if (!coLoaiHang) {
+            System.out.println("Không có hàng thuộc loại: " + loai);
         }
     }
     
@@ -209,6 +239,22 @@ public class Testmain {
 						dsHang.sortDonGia();
 						xuat(dsHang);
 						break;
+					
+
+	                case 8:
+	                    // Xuất hàng Thực phẩm
+	                    xuatTungLoai(dsHang, "Thực phẩm");
+	                    break;
+
+	                case 9:
+	                    // Xuất hàng Điện máy
+	                    xuatTungLoai(dsHang, "Điện máy");
+	                    break;
+
+	                case 10:
+	                    // Xuất hàng Sành sứ
+	                    xuatTungLoai(dsHang, "Sành sứ");
+	                    break;
                     case 0:
                         System.out.println("Cảm ơn bạn đã sử dụng chương trình");
                         break;
